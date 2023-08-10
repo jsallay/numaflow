@@ -391,7 +391,7 @@ func (r *jetStreamInstaller) createConfigMap(ctx context.Context) error {
 	ssName := generateJetStreamStatefulSetName(r.isbs)
 	replicas := r.isbs.Spec.JetStream.GetReplicas()
 	if replicas < 3 {
-		replicas = 3
+		fmt.Warnf("Jetstream replicas is %d.  There is no fault-tolerance wiht replicas < 3.", replicas)
 	}
 	routes := []string{}
 	for j := 0; j < replicas; j++ {
